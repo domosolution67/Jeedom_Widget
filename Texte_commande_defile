@@ -1,0 +1,40 @@
+<!--WIDGET 
+Widget créé par @domosolution67
+Widget maintenu par @domosolution67
+
+Changelog :
+- 31/07/2019 : Création
+
+Instruction :
+Widget permettant de faire défiler du texte
+Appliquer uniquement sur commande de type Info et de Sous-type Numérique
+Mettre dans les Paramètres optionnels widget les options suivantes : 
+direction -> Direction vers laquel le texte défile (valeur possible left / right)
+vitesse -> Vitesse de défilement du texte (la valeur de 6 est un bon point de départ)
+longueur_def -> Longueur sur laquel le texte va défiler 
+taille_ecriture	-> Taille d'écriture de la valeur de la commande
+couleur_ecriture -> Couleur d'écriture de la valeur de la commande (Black, white, red, blue, green, orange, etc)
+CES PARAMETRES SONT A METTRE SUR CHAQUES COMMANDES OU EST APPLIQUE LE WIDGET
+
+Pour la mise en place des paramètres optionnels widget, se référer à la doc du pluging widget https://jeedom.github.io/plugin-widget/fr_FR/#tocAnchor-1-3 paragraphe 4.3 à la ligne "Ajouter une option personnalisée"
+-->
+<div  class="cmd #history# container-fluid tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+    <div>
+      <marquee direction= #direction#
+		scrollamount= #vitesse#
+		style="width:#longueur_def#px;font-size:#taille_ecriture#pt;color:#couleur_ecriture#;" >
+        <strong><span class="spanCmd#id#">#state#</span></strong>
+       </marquee>
+</div>
+  <script>
+    jeedom.cmd.update['#id#'] = function(_options) {
+      	var valeur = _options.display_value;
+		var iconUpdate#uid# = function (state){
+		$('.cmd[data-cmd_uid=#uid#] .iconCmd').empty();
+		$(".spanCmd#id#").html(valeur)
+		$('.cmd[data-cmd_uid=#uid#] .state').text(state);};
+		iconUpdate#uid#(_options.display_value);}
+      
+    jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#'});
+  </script>
+</div>
